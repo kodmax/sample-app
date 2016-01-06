@@ -8,4 +8,11 @@
 	th, td {
 		text-align: left;
 	}
+	
+	&__row {
+		&--busy {
+			opacity: .7;
+		}
+	}
 }
+
