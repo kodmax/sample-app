@@ -4,10 +4,13 @@
 	<meta charset="UTF-8">
 	<title>Sample app</title>
 	
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	
 	<!-- build:js js/vendor.js -->
 	<script src=".3rd-party/requirejs/require.js"></script>
 	<script src=".3rd-party/angularjs/angular.js"></script>
 	<script src=".3rd-party/jquery/dist/jquery.js"></script>
+	<script src=".3rd-party/underscore/underscore.js"></script>
 	<!-- endbuild -->
 	
 	<!-- build:js js/app.js -->
@@ -16,9 +19,51 @@
 </head>
 
 <body>
-	<div ng-controller="MainController">
-		<h1>{{ greet }}</h1>
-		<div>
+	<div class="app" ng-controller="MainController">
+		<div ng-controller="GridController">
+			<table class="grid">
+				<thead>
+					<th></th>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>Date of birth</th>
+					<th>Mobile number</th>
+					<th>Address</th>
+					<th>
+						<button class="button__edit-all">Edit selected</button>
+					</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in rows">
+						<td><input type="checkbox"></td>
+						
+						<td>{{ row.data.id }}</td>
+						
+						<td ng-if="row.mode == 'view'">{{ row.data.name }}</td>
+						<td ng-if="row.mode == 'view'">{{ row.data.surname }}</td>
+						<td ng-if="row.mode == 'view'">{{ row.data.birthdate }}</td>
+						<td ng-if="row.mode == 'view'">{{ row.data.mobile }}</td>
+						<td ng-if="row.mode == 'view'">{{ row.data.address }}</td>
+						
+						<td ng-if="row.mode == 'edit'"><input ng-disabled="row.state == 'saving'" ng-model="row.edit.name"></td>
+						<td ng-if="row.mode == 'edit'"><input ng-disabled="row.state == 'saving'" ng-model="row.edit.surname"></td>
+						<td ng-if="row.mode == 'edit'"><input ng-disabled="row.state == 'saving'" ng-model="row.edit.birthdate"></td>
+						<td ng-if="row.mode == 'edit'"><input ng-disabled="row.state == 'saving'" ng-model="row.edit.mobile"></td>
+						<td ng-if="row.mode == 'edit'"><input ng-disabled="row.state == 'saving'" ng-model="row.edit.address"></td>
+						
+						<td ng-if="row.mode == 'view'">
+							<button ng-click="edit(row)" class="button__edit">Edit</button>
+							<button ng-click="delete(row)" class="button__delete">Delete</button>
+						</td>
+						
+						<td ng-if="row.mode == 'edit'">
+							<button ng-click="save(row)" class="button__save">Save</button>
+							<button ng-click="cancel(row)" class="button__cancel">Cancel</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

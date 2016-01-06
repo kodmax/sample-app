@@ -16,13 +16,13 @@ module.exports = function (grunt) {
 	//grunt.loadNpmTasks('grunt-angular-templates');
 	grunt.loadNpmTasks('grunt-karma');
 	//grunt.loadNpmTasks('grunt-jsdoc');
-	//grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-sass');
 	//grunt.loadNpmTasks('grunt-mocha-test');
 	
 	grunt.initConfig({
 		config: {
 			directory: {
-				servtmp: 'build/servtmp',
+				servtmp: 'build/serve-tmp',
 				tmp: 'build/tmp',
 				app: 'app',
 				scripts: 'app/scripts',
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 					hostname: 'localhost',
 					port: 8000,
 					livereload: true,
-					base: ['<%= config.directory.tmp %>', '<%= config.directory.app %>'],
+					base: ['<%= config.directory.servtmp %>', '<%= config.directory.app %>'],
 					open: true
 				}
 			}
@@ -64,11 +64,24 @@ module.exports = function (grunt) {
 			},
 			
 			css: {
-				files: ['<%= config.directory.servtmp %>/css/**/*.css'],
+				files: ['<%= config.directory.servtmp %>/css/**/*.css', '<%= config.directory.styles %>/**/*.css'],
 				options: { livereload: true }
 			}
-		}		
+		},
+		
+		sass: {
+			options: {
+				includePaths: ['<%= config.directory._3rdparty %>/bourbon/app/assets/stylesheets']
+			},
+			
+			dev: {
+				files: {
+					'<%= config.directory.servtmp %>/css/app.css': ['<%= config.directory.styles %>/main.scss']
+				}
+			}
+		}
 	});
 	
-	grunt.registerTask('serve', [/* 'sass', 'jshint', 'karma:dev', 'dom_templates:compile', */ 'connect:dev', 'watch']);
+	grunt.registerTask('serve', [ 'sass:dev', /*'jshint', 'karma:dev', 'dom_templates:compile', */ 'connect:dev', 'watch']);
+	grunt.registerTask('build', [ /* out of scope of the task */ ]);
 };

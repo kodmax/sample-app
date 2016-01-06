@@ -1,8 +1,9 @@
-define(['controllers/app/main'], function (Main) {
+define(['controllers/app/main-controller', 'controllers/grid/grid-controller'], function (MainController, GridController) {
 	'use strict';
 	
 	var controllersModule = angular.module('app.controllers', [])
-		.controller('MainController', Main)
+		.controller('MainController', MainController)
+		.controller('GridController', GridController)
 		;
 	
 	return controllersModule;
