@@ -8,8 +8,9 @@ define(['controllers/grid/grid-controller'], function (GridController) {
 			expect(GridController instanceof Array).toBe(true);
 		});
 	
-		it("Should provide ")
-		describe("GridController")
+		it("Should ask for grid data", function () {
+			
+		});
 	});
 	
 });

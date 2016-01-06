@@ -31,7 +31,8 @@ module.exports = function (grunt) {
 				styles: 'app/styles',
 				templates: 'app/templates',
 				build: 'build/artifacts',
-				test: 'test'
+				spec: 'spec',
+				data: 'example-data'
 			}
 		},
 
@@ -41,7 +42,7 @@ module.exports = function (grunt) {
 					hostname: 'localhost',
 					port: 8000,
 					livereload: true,
-					base: ['<%= config.directory.servtmp %>', '<%= config.directory.app %>'],
+					base: ['<%= config.directory.data %>', '<%= config.directory.servtmp %>', '<%= config.directory.app %>'],
 					open: true
 				}
 			}
@@ -54,7 +55,7 @@ module.exports = function (grunt) {
 			},
 			
 			scripts: {
-				files: ['<%= config.directory.scripts %>/**/*.js', '<%= config.directory.test %>/**/*.js'],
+				files: ['<%= config.directory.scripts %>/**/*.js', '<%= config.directory.spec %>/**/*.js'],
 				options: { livereload: true },
 				tasks: ['jshint']
 			},
@@ -65,7 +66,7 @@ module.exports = function (grunt) {
 			},
 			
 			css: {
-				files: ['<%= config.directory.servtmp %>/css/**/*.css', '<%= config.directory.styles %>/**/*.css'],
+				files: ['<%= config.directory.servtmp %>/css/**/*.css'],
 				options: { livereload: true }
 			}
 		},
@@ -87,14 +88,14 @@ module.exports = function (grunt) {
 				src: '<%= config.directory.scripts %>/**/*.js',
 				options: {
 					keepRunner: true,
-					specs: 'spec/**/*-spec.js',
-					helpers: 'spec/**/*-helper.js',
+					specs: '<%= config.directory.spec %>/**/*-spec.js',
+					helpers: '<%= config.directory.spec %>/**/*-helper.js',
 					vendor: [ 'app/.3rd-party/angularjs/angular.js', 'app/.3rd-party/jquery/dist/jquery.js', 'app/.3rd-party/underscore/underscore.js' ],
 					template: require('grunt-template-jasmine-requirejs'),
 					templateOptions: {
 						requireConfigFile: '<%= config.directory.scripts %>/app.js',
 						requireConfig: {
-							baseUrl: 'app/scripts'
+							baseUrl: '<%= config.directory.scripts %>'
 						}
 					}
 				}
