@@ -6,6 +6,7 @@ define([], function () {
 		$scope.rows = [];
 		$.ajax({
 			url: 'fake/findall.json',
+			method: 'get',
 			dataType: 'json',
 			success: function (data) {
 				$scope.$apply(function () {
