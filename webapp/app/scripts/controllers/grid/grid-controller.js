@@ -61,6 +61,7 @@ define([], function () {
 				
 				success: function () {
 					$scope.$apply(function () {
+						row.data = row.edit;
 						row.mode = 'view';
 						row.state = 'idle';
 					});					
@@ -82,7 +83,7 @@ define([], function () {
 				url: 'http://users/impaqgroup.com/remove/user.' + row.data.id,
 				method: 'post',
 				contentType: 'application/json; charset=UTF-8',
-				data: JSON.stringify(row.edit),
+				data: JSON.stringify(row.data),
 				
 				success: function () {
 					$scope.$apply(function () {
