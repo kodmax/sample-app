@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-jscs');
 	//grunt.loadNpmTasks('grunt-contrib-requirejs');
 	//grunt.loadNpmTasks('grunt-contrib-copy');
 	//grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -99,9 +100,25 @@ module.exports = function (grunt) {
 					}
 				}
 			}
+		},
+		
+		jshint: {
+			dist: {
+				src: ['<%= config.directory.scripts %>/**/*.*js', '<%= config.directory.spec %>/**/*.js']
+			}
+		},
+		
+		jscs: {
+			options: {
+		        config: ".jscsrc"
+			},
+			dist: {
+				src: ['<%= config.directory.scripts %>/**/*.*js', '<%= config.directory.spec %>/**/*.js']
+			}			
 		}
 	});
 	
-	grunt.registerTask('serve', [ 'sass:dev', /*'jshint', 'karma:dev', 'dom_templates:compile', */ 'connect:dev', 'watch']);
+	grunt.registerTask('serve', [ 'sass:dev', 'jshint', 'jscs', 'jasmine:dev', 'connect:dev', 'watch']);
 	grunt.registerTask('build', [ /* out of scope of the task */ ]);
+	grunt.registerTask('test', [ 'jshint', 'jscs', 'jasmine' ]);
 };
