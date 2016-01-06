@@ -1,4 +1,5 @@
 .project
 .settings
-app/node_modules
-app/web/.3rd-party
+webapp/node_modules
+webapp/app/.3rd-party
+webapp/build
