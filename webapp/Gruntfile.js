@@ -18,6 +18,7 @@ module.exports = function (grunt) {
 	//grunt.loadNpmTasks('grunt-jsdoc');
 	grunt.loadNpmTasks('grunt-sass');
 	//grunt.loadNpmTasks('grunt-mocha-test');
+	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	
 	grunt.initConfig({
 		config: {
@@ -77,6 +78,25 @@ module.exports = function (grunt) {
 			dev: {
 				files: {
 					'<%= config.directory.servtmp %>/css/app.css': ['<%= config.directory.styles %>/main.scss']
+				}
+			}
+		},
+		
+		jasmine: {
+			dev: {
+				src: '<%= config.directory.scripts %>/**/*.js',
+				options: {
+					keepRunner: true,
+					specs: 'spec/*Spec.js',
+					helpers: 'spec/*Helper.js',
+					vendor: [ 'app/.3rd-party/angularjs/angular.js', 'app/.3rd-party/jquery/dist/jquery.js', 'app/.3rd-party/underscore/underscore.js' ],
+					template: require('grunt-template-jasmine-requirejs'),
+					templateOptions: {
+						requireConfigFile: '<%= config.directory.scripts %>/app.js',
+						requireConfig: {
+							baseUrl: 'app/scripts'
+						}
+					}
 				}
 			}
 		}
