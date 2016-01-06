@@ -2,7 +2,24 @@ define([], function () {
 	'use strict';
 	
 	var GridController = ['$scope', function ($scope) {
+
+		$scope.rows = [];
+		$.ajax({
+			url: 'fake/findall.json',
+			dataType: 'json',
+			success: function (data) {
+				$scope.$apply(function () {
+					$scope.rows = [];
+					
+					_.each(data, function (rowdata) {
+						$scope.rows.push({ mode: 'view', state: 'idle', data: rowdata });
+					});
+				});
+			}
+		});
 		
+
+		/*
 		$scope.rows = [
 		    { mode: 'view', state: 'idle', data: { id: 1, name: 'name1', surname: 'surname1', birthdate: '24-8-1981', mobile:'1231241234', address: 'Poznań, Długa 2' } },
 		    { mode: 'view', state: 'idle', data: { id: 2, name: 'name2', surname: 'surname2', birthdate: '24-10-1981', mobile:'3223423', address: 'Poznań, Długa 3' } },
@@ -12,6 +29,7 @@ define([], function () {
 		    { mode: 'view', state: 'idle', data: { id: 6, name: 'name6', surname: 'surname6', birthdate: '24-3-1981', mobile:'34657645', address: 'Poznań, Długa 7' } },
 		    { mode: 'view', state: 'idle', data: { id: 7, name: 'name7', surname: 'surname7', birthdate: '24-5-1981', mobile:'234235345', address: 'Poznań, Długa 8' } }
 	    ];
+	    */
 		
 		$scope.edit = function (row) {
 			row.edit = _.clone(row.data); 

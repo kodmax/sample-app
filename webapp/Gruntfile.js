@@ -87,7 +87,6 @@ module.exports = function (grunt) {
 			dev: {
 				src: '<%= config.directory.scripts %>/**/*.js',
 				options: {
-					keepRunner: true,
 					specs: '<%= config.directory.spec %>/**/*-spec.js',
 					helpers: '<%= config.directory.spec %>/**/*-helper.js',
 					vendor: [ 'app/.3rd-party/angularjs/angular.js', 'app/.3rd-party/jquery/dist/jquery.js', 'app/.3rd-party/underscore/underscore.js' ],
