@@ -32,13 +32,13 @@
 						<th>Mobile number</th>
 						<th>Address</th>
 						<th>
-							<button class="button__edit-all">Edit selected</button>
+							<button ng-click="editSelected()" class="button__edit-all">Edit selected</button>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="grid__row" ng-class="{ 'grid__row--busy': row.state != 'idle' }"ng-repeat="row in rows">
-						<td><input type="checkbox"></td>
+						<td><input ng-model="row.marked" type="checkbox"></td>
 						
 						<td>{{ row.data.id }}</td>
 						

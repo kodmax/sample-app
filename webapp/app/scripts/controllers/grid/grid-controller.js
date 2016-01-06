@@ -22,6 +22,15 @@ define([], function () {
 			row.mode = 'view';
 		};
 		
+		$scope.editSelected = function () {
+			_.each($scope.rows, function (row) {
+				if (row.marked) {
+					$scope.edit(row);
+					row.marked = false;
+				}
+			});
+		};
+		
 		$scope.save = function (row) {
 			row.state = 'saving';
 			
