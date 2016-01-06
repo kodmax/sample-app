@@ -87,8 +87,8 @@ module.exports = function (grunt) {
 				src: '<%= config.directory.scripts %>/**/*.js',
 				options: {
 					keepRunner: true,
-					specs: 'spec/*Spec.js',
-					helpers: 'spec/*Helper.js',
+					specs: 'spec/**/*-spec.js',
+					helpers: 'spec/**/*-helper.js',
 					vendor: [ 'app/.3rd-party/angularjs/angular.js', 'app/.3rd-party/jquery/dist/jquery.js', 'app/.3rd-party/underscore/underscore.js' ],
 					template: require('grunt-template-jasmine-requirejs'),
 					templateOptions: {
